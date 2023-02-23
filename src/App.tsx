@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import MovieList from "components/MoviesList";
 
 const App = () => {
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetchMoviesHandler();
+  }, []);
+
   const fetchMoviesHandler = async () => {
+    setError("");
     try {
+      setLoading(true);
       const result = await axios.get("https://swapi.dev/api/films/");
       setMovies(
         result.data.results.map((movie: any) => {
@@ -18,14 +27,17 @@ const App = () => {
           };
         })
       );
+      setLoading(false);
     } catch (error) {
-      console.log(error);
+      setError(error instanceof Error ? error.message : "Something went wrong");
+      setLoading(false);
     }
   };
   return (
     <div>
-      <MovieList movies={movies} />
-      <button onClick={fetchMoviesHandler}>Fetch Movies</button>
+      {loading && <p>Loading...</p>}
+      {!loading && <MovieList movies={movies} />}
+      {error && <p>{error}</p>}
     </div>
   );
 };
