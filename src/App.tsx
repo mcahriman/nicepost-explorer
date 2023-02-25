@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios, {AxiosError} from "axios";
+import "./App.css";
 
 import MovieList from "components/MoviesList";
 
@@ -31,7 +32,7 @@ const App = () => {
     setLoading(false);
   };
   return (
-    <div>
+    <div className="main">
       {!isLoading && <MovieList movies={movies} />}
       {isLoading && <p>Loading...</p>}
       {error && <p>Something went wrong: {error}</p>}
