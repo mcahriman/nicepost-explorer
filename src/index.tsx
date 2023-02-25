@@ -11,7 +11,7 @@ if (rootElement) {
   console.log(env.MOVIES_ENDPOINT);
   root.render(
     <React.StrictMode>
-      <App moviesEndpoint={env.MOVIES_ENDPOINT}/>
+      <App converterApi={env.CONVERTER_API}/>
     </React.StrictMode>
   );
 }
