@@ -1,6 +1,8 @@
 import React, { useCallback } from "react";
 import classes from "./PasteInput.module.css";
-type Props = {};
+type Props = {
+  onPasteJson(json: string): void;
+};
 
 const PasteInput = (props: Props) => {
   const [pastedImage, setPastedImage] = React.useState<string | null>(null);
@@ -27,15 +29,24 @@ const PasteInput = (props: Props) => {
 
       const text = e.clipboardData.getData("text/plain");
       console.log(`pasted ${text.length} characters`);
+      try {
+        if (JSON.parse(text)) {
+          console.log(JSON.parse(text));
+        }
+        props.onPasteJson(text);
+      } catch (error) {
+        // ignore
+      }
     },
-    []
+    [props]
   );
 
   return (
-    <div className={classes.pastedInput}>
-      <textarea onPaste={handlePaste} />
+    <div className={classes.pasteInput}>
+      <textarea onPaste={handlePaste} placeholder="PASTE HERE" />
       {pastedImage && (
         <div className={classes.pastedImage}>
+          <p> Image fetched from clipboard </p>
           <img src={pastedImage} alt="fetched from clipboard" />
         </div>
       )}
