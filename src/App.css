@@ -11,13 +11,18 @@
 }
 .App-header {
   background-color: #282c34;
-  min-height: 10rem;
+  height: 7rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: end;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-header h1 {
+  font-size: 2rem;
+  margin-right: 2rem;
+  padding: 0;
 }
 
 main {
@@ -25,12 +30,17 @@ main {
   align-items: top;
   justify-content: center;
   color: rgb(9, 1, 35);
+  height: calc(100vh - 10rem);
 }
 .mainContent {
   flex-grow: 1;
   padding: 1rem;
-
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
 }
+
 
 nav {
   width: 40rem;
@@ -38,6 +48,10 @@ nav {
   padding-right: 2rem;
   padding: 1rem;
   position: relative;
+}
+
+svg {
+  margin-right: 2rem;
 }
 
 
@@ -58,4 +72,10 @@ nav {
   z-index: 10;
   top: 5rem;
   left: 18rem;
+}
+
+.copyButton svg {
+  width: 2rem;
+  height: 2rem;
+  margin: 0.2rem;
 }

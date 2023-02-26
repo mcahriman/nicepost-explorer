@@ -13,3 +13,21 @@
     padding: 0.5rem;
     background-color: #ccc;
 }
+
+.gridContainer {
+    height: 100%;
+}
+
+
+.summary {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+    width: 100%;
+  }
+
+  .stats {
+    flex-grow: 1;
+  }

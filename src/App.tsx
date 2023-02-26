@@ -5,6 +5,9 @@ import ReactCodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import PasteResult from "components/PasteResult";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClipboardCheck, faClipboard, faPoll } from "@fortawesome/free-solid-svg-icons";
+
 
 type Props = { converterApi: string };
 
@@ -23,7 +26,7 @@ const App = ({ converterApi }: Props) => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Poor Man Shitpost Explorer</h1>
+        <h1><FontAwesomeIcon icon={faPoll}/>Poor Man S***post Explorer&trade;</h1>
       </header>
 
       <main>
@@ -34,7 +37,7 @@ const App = ({ converterApi }: Props) => {
             onClick={copyToClipboard}
             title="Copy to clipboard"
           >
-            {copied ? "✅" : "📄"}
+            {copied ?  <FontAwesomeIcon icon={faClipboardCheck}  /> : <FontAwesomeIcon icon={faClipboard}  />}
           </button>
 
           <ReactCodeMirror
