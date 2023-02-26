@@ -45,25 +45,30 @@ export const PasteResult = ({ data }: Props) => {
     : tableData;
 
   const copyUniqueNewlineSeparated = () => {
-    const uniqueUsers = uniqueUserTableData.map((row) => row[0].replace(/\n/g, " "));
-    navigator.clipboard.writeText(uniqueUsers.join("\n")).then(() => {
-      console.log("Copied to clipboard");
+    const uniqueUsers = uniqueUserTableData.map((row) =>
+      row[0].replace(/\n/g, " ")
+    );
+    navigator.clipboard
+      .writeText(uniqueUsers.join("\n"))
+      .then(() => {
+        console.log("Copied to clipboard");
         setCopied(true);
         setTimeout(() => {
-            setCopied(false);
-        }
-        , 2000);
-    }).catch((err) => {
+          setCopied(false);
+        }, 2000);
+      })
+      .catch((err) => {
         console.log("Error copying to clipboard", err);
-    });
+      });
   };
 
   return (
     <div className={styles.gridContainer}>
+      {currentData.length > 0 && (
       <div className={styles.summary}>
         <div className={styles.stats}>
           <p>
-            <FontAwesomeIcon icon={faComment} /> {tableData.length}
+            <FontAwesomeIcon icon={faComment} /> {tableData.length} total
           </p>
           <p>
             <FontAwesomeIcon icon={faCommentAlt} />
@@ -90,30 +95,35 @@ export const PasteResult = ({ data }: Props) => {
           </button>
         </div>
       </div>
+      )}
+
       {currentData.length === 0 && (
         <div className={styles.noData}>
           <FontAwesomeIcon icon={faCommentSlash} />
           Nothing to show yet
         </div>
       )}
-      <table className={styles.resultTable}>
-        <thead>
-          <tr>
-            <th>User Name</th>
-            <th>Post</th>
-            <th>Profile Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentData.map(([name, comment, profilelink, commentId]) => (
-            <tr key={commentId}>
-              <td>{name}</td>
-              <td>{comment}</td>
-              <td>{profilelink}</td>
+
+      {currentData.length > 0 && (
+        <table className={styles.resultTable}>
+          <thead>
+            <tr>
+              <th>User Name</th>
+              <th>Post</th>
+              <th>Profile Link</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {currentData.map(([name, comment, profilelink, commentId]) => (
+              <tr key={commentId}>
+                <td>{name}</td>
+                <td>{comment}</td>
+                <td>{profilelink}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };
