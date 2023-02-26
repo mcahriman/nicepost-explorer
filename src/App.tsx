@@ -6,7 +6,7 @@ import { javascript } from "@codemirror/lang-javascript";
 import PasteResult from "components/PasteResult";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClipboardCheck, faClipboard, faPoll } from "@fortawesome/free-solid-svg-icons";
+import { faClipboardCheck, faClipboard, faPoll, faWarning } from "@fortawesome/free-solid-svg-icons";
 
 
 type Props = { converterApi: string };
@@ -32,6 +32,8 @@ const App = ({ converterApi }: Props) => {
       <main>
         <nav>
           <h3>1. Copy code below and run it in console on m.facebook.com</h3>
+          <h3><FontAwesomeIcon icon={faWarning}/>Works in Firefox only</h3>
+
           <button
             className="copyButton"
             onClick={copyToClipboard}

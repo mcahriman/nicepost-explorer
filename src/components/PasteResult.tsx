@@ -3,9 +3,10 @@ import React from "react";
 import styles from "./PasteResult.module.css";
 import {
   faClipboard,
+  faClipboardCheck,
   faComment,
   faCommentAlt,
-  faFileExcel,
+  faCommentSlash,
   faUser,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
@@ -17,6 +18,7 @@ import buttonStyles from "../UI/buttons.module.css";
 type Props = { data: string | null };
 export const PasteResult = ({ data }: Props) => {
   const [showByUnique, setShowByUnique] = React.useState(false);
+  const [copied, setCopied] = React.useState(false);
 
   const tableData = JSON.parse(data || "[]")
     .sort((a: string[], b: string[]) => (a[0] > b[0] ? 1 : -1))
@@ -41,13 +43,31 @@ export const PasteResult = ({ data }: Props) => {
   const currentData: string[][] = showByUnique
     ? uniqueUserTableData
     : tableData;
+  const copyUniqueNewlineSeparated = () => {
+    const uniqueUsers = uniqueUserTableData.map((row) => row[0]);
+    navigator.clipboard.writeText(uniqueUsers.join("\n")).then(() => {
+      console.log("Copied to clipboard");
+        setCopied(true);
+        setTimeout(() => {
+            setCopied(false);
+        }
+        , 2000);
+    }).catch((err) => {
+        console.log("Error copying to clipboard", err);
+    });
+  };
 
   return (
     <div className={styles.gridContainer}>
       <div className={styles.summary}>
         <div className={styles.stats}>
-          <p><FontAwesomeIcon icon={faComment} /> {tableData.length}</p>
-          <p><FontAwesomeIcon icon={faCommentAlt} />{uniqueUserTableData.length} unique</p>
+          <p>
+            <FontAwesomeIcon icon={faComment} /> {tableData.length}
+          </p>
+          <p>
+            <FontAwesomeIcon icon={faCommentAlt} />
+            {uniqueUserTableData.length} unique
+          </p>
         </div>
         <div className={styles.buttons}>
           <button
@@ -60,19 +80,21 @@ export const PasteResult = ({ data }: Props) => {
             <FontAwesomeIcon icon={showByUnique ? faUsers : faUser} />
           </button>
           <ExcelExport tableData={currentData} />
-          {/* <button onClick={() => {}}>
-            <FontAwesomeIcon
-              icon={faFileExcel}
-              title="download data as excel file"
-            />
-          </button> */}
-          <button onClick={() => {}} title="Copy unique users to clipboard"
-          className={buttonStyles.gridControlButton} >
-            
-            <FontAwesomeIcon icon={faClipboard} />
+          <button
+            onClick={copyUniqueNewlineSeparated}
+            title="Copy unique users to clipboard"
+            className={buttonStyles.gridControlButton}
+          >
+            <FontAwesomeIcon icon={copied ? faClipboardCheck : faClipboard} />
           </button>
         </div>
       </div>
+      {currentData.length === 0 && (
+        <div className={styles.noData}>
+          <FontAwesomeIcon icon={faCommentSlash} />
+          Nothing to show yet
+        </div>
+      )}
       <table className={styles.resultTable}>
         <thead>
           <tr>

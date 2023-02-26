@@ -31,3 +31,12 @@
   .stats {
     flex-grow: 1;
   }
+
+  .noData {
+    position: absolute;
+    font-size: 6rem;
+    z-index: 10;
+    color: #ccc;
+    top: calc(50% - 3rem);
+    left: calc(50% - 12rem);
+  }
