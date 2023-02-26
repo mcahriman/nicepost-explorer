@@ -30,7 +30,7 @@ main {
   align-items: top;
   justify-content: center;
   color: rgb(9, 1, 35);
-  height: calc(100vh - 10rem);
+  height: calc(100vh - 9rem);
 }
 .mainContent {
   flex-grow: 1;
@@ -39,58 +39,25 @@ main {
   flex-direction: column;
   height: 100%;
   overflow: auto;
+
 }
 
 
 nav {
-  width: 40rem;
+  flex-grow: 1;
+  width: 30em;
+  min-width: 30em;
+  max-width: 30em;
   border-right: 1px solid #ccc;
   padding-right: 2rem;
   padding: 1rem;
   position: relative;
   box-shadow: 2px 2px 5px rgb(0, 0, 0);
   height: 100%;
+  overflow: auto;
 }
 
 svg {
   margin-right: 2rem;
 }
 
-
-.codeContainer {
-  width: 100%;
-}
-
-.copyButton {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 2rem;
-
-  font-size: 2rem;
-
-  margin-left:18rem;
-  position: absolute;
-  z-index: 10;
-  top: 1rem;
-  right: 1rem;
-}
-
-.copyButton svg {
-  width: 2rem;
-  height: 2rem;
-  margin: 0.2rem;
-}
-
-.codeMirrorExample {
-  position: relative;
-  margin-right: 2em;
-  box-shadow: 2px 2px 5px rgb(0, 0, 0);
-  margin-bottom: 2rem;
-}
-
-.codeMirrorExample h4 {
-  margin: 0;
-  padding: 0.5rem;
-  background-color: #ccc;
-  color: #000;
-}

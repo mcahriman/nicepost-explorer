@@ -1,32 +1,20 @@
 import PasteInput from "components/PasteInput";
 import "./App.css";
 import { expandExample, expandExampleInstagram } from "examples/expandExample";
-import ReactCodeMirror from "@uiw/react-codemirror";
-import { javascript } from "@codemirror/lang-javascript";
 import PasteResult from "components/PasteResult";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faClipboardCheck,
-  faClipboard,
   faPoll,
   faWarning,
 } from "@fortawesome/free-solid-svg-icons";
+import CodeMirrorExample from "components/CodeMirrorExample";
 
 type Props = { converterApi: string };
 
 const App = ({ converterApi }: Props) => {
-  const [copied, setCopied] = useState(false);
   const [pastedJson, setPastedJson] = useState<string | null>(null);
 
-  const copyToClipboard = (data: string) => {
-    navigator.clipboard.writeText(data).then(() => {
-      setCopied(true);
-      setTimeout(() => {
-        setCopied(false);
-      }, 1000);
-    });
-  };
   return (
     <div className="App">
       <header className="App-header">
@@ -44,51 +32,11 @@ const App = ({ converterApi }: Props) => {
             Works in Firefox only
           </h3>
 
-          <div className="codeMirrorExample">
-            <h4>m.facebook.com</h4>
-            <button
-              className="copyButton"
-              onClick={() => {copyToClipboard(expandExample)}}
-              title="Copy to clipboard"
-            >
-              {copied ? (
-                <FontAwesomeIcon icon={faClipboardCheck} />
-              ) : (
-                <FontAwesomeIcon icon={faClipboard} />
-              )}
-            </button>
-
-            <ReactCodeMirror
-              className="codeContainer"
-              value={expandExample}
-              extensions={[javascript({})]}
-              height="30rem"
-              width="100%"
-            />
-          </div>
-
-          <div className="codeMirrorExample">
-            <h4>instagram web</h4>
-            <button
-              className="copyButton"
-              onClick={() => {copyToClipboard(expandExampleInstagram)}}
-              title="Copy to clipboard"
-            >
-              {copied ? (
-                <FontAwesomeIcon icon={faClipboardCheck} />
-              ) : (
-                <FontAwesomeIcon icon={faClipboard} />
-              )}
-            </button>
-
-            <ReactCodeMirror
-              className="codeContainer"
-              value={expandExampleInstagram}
-              extensions={[javascript({})]}
-              height="30rem"
-              width="100%"
-            />
-          </div>
+          <CodeMirrorExample
+            title="instagram web"
+            code={expandExampleInstagram}
+          />
+          <CodeMirrorExample title="m.facebook.com" code={expandExample} />
 
           <h3>2. Paste the result into the text area below</h3>
           <PasteInput onPasteJson={setPastedJson} />

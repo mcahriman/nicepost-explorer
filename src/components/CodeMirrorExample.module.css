@@ -1,0 +1,38 @@
+
+.codeContainer {
+    width: 100%;
+  }
+  
+  .copyButton {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 2rem;
+  
+    font-size: 2rem;
+  
+    margin-left:18rem;
+    position: absolute;
+    z-index: 10;
+    top: 1rem;
+    right: 1rem;
+  }
+  
+  .copyButton svg {
+    width: 2rem;
+    height: 2rem;
+    margin: 0.2rem;
+  }
+  
+  .codeMirrorExample {
+    position: relative;
+    margin-right: 2em;
+    box-shadow: 2px 2px 5px rgb(0, 0, 0);
+    margin-bottom: 2rem;
+  }
+  
+  .codeMirrorExample h4 {
+    margin: 0;
+    padding: 0.5rem;
+    background-color: #ccc;
+    color: #000;
+  }
