@@ -20,7 +20,7 @@ const App = ({ converterApi }: Props) => {
       <header className="App-header">
         <h1>
           <FontAwesomeIcon icon={faPoll} />
-          Poor Man S***post Explorer&trade;
+          Poor Man's S***post Explorer&trade;
         </h1>
       </header>
 

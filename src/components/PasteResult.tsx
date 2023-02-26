@@ -43,8 +43,9 @@ export const PasteResult = ({ data }: Props) => {
   const currentData: string[][] = showByUnique
     ? uniqueUserTableData
     : tableData;
+
   const copyUniqueNewlineSeparated = () => {
-    const uniqueUsers = uniqueUserTableData.map((row) => row[0]);
+    const uniqueUsers = uniqueUserTableData.map((row) => row[0].replace(/\n/g, " "));
     navigator.clipboard.writeText(uniqueUsers.join("\n")).then(() => {
       console.log("Copied to clipboard");
         setCopied(true);
